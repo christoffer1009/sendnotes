@@ -12,5 +12,9 @@
                 @endforeach
             </div>
         @endif
+
+        <div class="mt-6">
+            {{ $notes->links() }}
+        </div>
     </div>
 @endsection

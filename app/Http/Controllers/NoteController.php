@@ -10,14 +10,14 @@ class NoteController extends Controller
 {
     public function index()
     {
-        $notes = Note::where('visibility', 'public')->get();
+        $notes = Note::where('visibility', 'public')->paginate(21);
 
         return view('notes.index', compact('notes'));
     }
 
     public function myNotes()
     {
-        $notes = Note::where('user_id', auth()->user()->id)->get();
+        $notes = Note::where('user_id', auth()->user()->id)->paginate(21);
         return view('notes.myNotes', compact('notes'));
     }
 
