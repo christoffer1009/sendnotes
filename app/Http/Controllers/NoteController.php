@@ -103,7 +103,24 @@ class NoteController extends Controller
             'visibility' => 'required|in:public,private',
         ]);
 
-        $note->update($request->only(['title', 'body', 'visibility']));
+        if ($request->visibility !== $note->visibility) {
+            if ($request->visibility === 'private') {
+                $access_token = (string) Str::uuid();
+                while (Note::where('access_token', $access_token)->exists()) {
+                    $access_token = (string) Str::uuid();
+                }
+            } elseif ($request->visibility === 'public') {
+                $access_token = null;
+            }
+        }
+
+        $note->update([
+            'title' => $request->input('title'),
+            'body' => $request->input('body'),
+            'visibility' => $request->input('visibility'),
+            'access_token' => $access_token
+        ]);
+
 
         return redirect()->route('notes.index');
     }
