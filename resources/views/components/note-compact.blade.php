@@ -15,8 +15,8 @@
                     <i class="self-center fas fa-eye" title="Public"></i>
                     <span class="mx-2 text-sm">Público</span>
                 @else
-                    <i class="fas fa-lock" title="Private"></i>
-                    <span class="text-sm">Privado</span>
+                    <i class="self-center fas fa-lock" title="Private"></i>
+                    <span class="mx-2 text-sm">Privado</span>
                 @endif
             </div>
 
