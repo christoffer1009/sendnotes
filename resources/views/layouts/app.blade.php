@@ -54,7 +54,7 @@
 
         <footer class="mt-4 bg-white shadow">
             <div class="container px-4 py-4 mx-auto text-center text-gray-600">
-                &copy; {{ date('Y') }} {{ config('app.name', 'Laravel') }}. All rights reserved.
+                &copy; {{ date('Y') }} {{ config('app.name', 'SendNotes') }}. All rights reserved.
             </div>
         </footer>
     </div>
