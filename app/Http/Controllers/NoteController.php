@@ -8,16 +8,34 @@ use Illuminate\Support\Str;
 
 class NoteController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $notes = Note::where('visibility', 'public')->paginate(21);
+        $query = Note::query();
+        $search = $request->input('search');
+        if ($search) {
+            $query->where('title', 'like', "%{$search}%")->where('visibility', 'public')
+                ->orWhere('body', 'like', "%{$search}%")->where('visibility', 'public');
+        } else {
+            $query->where('visibility', 'public');
+        }
+
+        $notes = $query->paginate(21)->appends($request->query());
 
         return view('notes.index', compact('notes'));
     }
 
-    public function myNotes()
+    public function myNotes(Request $request)
     {
-        $notes = Note::where('user_id', auth()->user()->id)->paginate(21);
+        $query = Note::query();
+        $search = $request->input('search');
+        if ($search) {
+            $query->where('title', 'like', "%{$search}%")->where('user_id', auth()->user()->id)
+                ->orWhere('body', 'like', "%{$search}%")->where('user_id', auth()->user()->id);
+        } else {
+            $query->where('user_id', auth()->user()->id);
+        }
+
+        $notes = $query->paginate(21)->appends($request->query());
         return view('notes.myNotes', compact('notes'));
     }
 
