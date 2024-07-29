@@ -4,10 +4,10 @@
     <div class="flex items-center justify-between mb-8">
         <h2 class="mb-2 text-xl font-bold">{{ $note->title }}</h2>
 
-        <div class="px-2.5 py-0.5 mt-2 mb-2 border rounded-full text-sm self-end">
+        <div class="px-2.5 py-0.5 mt-2 mb-2 border rounded-full text-sm flex justify-between self-start">
             @if ($note->visibility === 'public')
-                <i class="fas fa-eye" title="Public"></i>
-                <span class="text-sm">Público</span>
+                <i class="self-center fas fa-eye" title="Public"></i>
+                <span class="mx-2 text-sm">Público</span>
             @else
                 <i class="fas fa-lock" title="Private"></i>
                 <span class="text-sm">Privado</span>
@@ -16,7 +16,7 @@
     </div>
 
     <div>
-        <p class="mb-2 text-gray-700 whitespace-pre-wrap">{!! nl2br(e($note->body)) !!}</p>
+        <p class="mb-2 text-gray-700 whitespace-pre-wrap">{!! e($note->body) !!}</p>
     </div>
 
     <div class="flex items-end justify-between">
